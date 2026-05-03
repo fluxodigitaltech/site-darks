@@ -278,27 +278,42 @@ const UnitCard: React.FC<UnitCardProps> = ({ unit, allMemberships }) => {
             </>
           ) : selectedPlan ? (
             <div className="bg-zinc-900/70 backdrop-blur-sm border border-white/10 flex flex-col rounded-lg p-3 mb-3 flex-grow">
-              <h4 className="text-center text-xs font-bold uppercase tracking-widest text-white/70 mb-3">
-                Selecione seu Plano
-              </h4>
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 mb-3">
-                {availableMemberships.map((plan) => (
-                  <Button
-                    key={plan.idMembership}
-                    size="sm"
-                    variant="outline"
-                    className={cn(
-                      "h-auto min-h-[40px] py-2 px-3 rounded-full text-[10px] font-bold transition-all duration-300 leading-tight whitespace-normal text-center break-words",
-                      selectedPlan?.idMembership === plan.idMembership
-                        ? "bg-primary text-primary-foreground border-primary shadow-md shadow-primary/30"
-                        : "bg-transparent text-white/70 border-white/20 hover:bg-white/10 hover:text-white"
-                    )}
-                    onClick={() => setSelectedPlan(plan)}
-                  >
-                    {plan.nameMembership}
-                  </Button>
-                ))}
-              </div>
+              {availableMemberships.length === 1 ? (
+                /* Plano único — só exibe o nome, sem botão "selecionável" */
+                <div className="text-center mb-3 pb-3 border-b border-white/10">
+                  <p className="text-[9px] font-black uppercase tracking-[0.4em] text-white/40 mb-1">
+                    Plano Disponível
+                  </p>
+                  <p className="text-sm font-bold uppercase tracking-tight text-white leading-snug">
+                    {selectedPlan.nameMembership}
+                  </p>
+                </div>
+              ) : (
+                /* Múltiplos planos — botões de seleção */
+                <>
+                  <h4 className="text-center text-xs font-bold uppercase tracking-widest text-white/70 mb-3">
+                    Selecione seu Plano
+                  </h4>
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 mb-3">
+                    {availableMemberships.map((plan) => (
+                      <Button
+                        key={plan.idMembership}
+                        size="sm"
+                        variant="outline"
+                        className={cn(
+                          "h-auto min-h-[40px] py-2 px-3 rounded-full text-[10px] font-bold transition-all duration-300 leading-tight whitespace-normal text-center break-words",
+                          selectedPlan?.idMembership === plan.idMembership
+                            ? "bg-primary text-primary-foreground border-primary shadow-md shadow-primary/30"
+                            : "bg-transparent text-white/70 border-white/20 hover:bg-white/10 hover:text-white"
+                        )}
+                        onClick={() => setSelectedPlan(plan)}
+                      >
+                        {plan.nameMembership}
+                      </Button>
+                    ))}
+                  </div>
+                </>
+              )}
 
               <div className="text-center space-y-0.5 mb-3">
                 {planDetails.isPromotionalRecurring ? (
