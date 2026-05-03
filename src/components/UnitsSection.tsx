@@ -16,6 +16,16 @@ const getTier = (name: string): 'PRO' | 'PRIME' | 'DIAMOND' | undefined => {
   return undefined;
 };
 
+// Foto pode vir como string (URL) ou como attachment do NocoDB (array de objetos)
+const extractFotoUrl = (foto: unknown): string | undefined => {
+  if (typeof foto === 'string' && foto.length > 0) return foto;
+  if (Array.isArray(foto) && foto.length > 0) {
+    const first = foto[0] as { url?: string; signedUrl?: string };
+    return first?.signedUrl || first?.url;
+  }
+  return undefined;
+};
+
 // Mapeamento fixo de nome da unidade → idBranch do EVO (fallback quando NocoDB não tiver o campo)
 const getIdBranchFallback = (name: string): number | undefined => {
   const n = name.toUpperCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
@@ -40,11 +50,11 @@ const UnitsSection = () => {
 
         return {
           name: unit.Unidade,
-          address: unit.Endereco,
+          address: unit.Endereco || unit.Descricao || '',
           hours: unit.Horario || '24 HORAS',
           imageUrl: getTier(unit.Unidade) === 'PRIME' && unit.Unidade.toUpperCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").includes("RIBEIRAO")
             ? "/ribeirao-pires.png"
-            : unit.Foto,
+            : extractFotoUrl(unit.Foto),
           whatsappNumber: unit.WhatsApp,
           purchaseLink: unit['Link de compra'],
           instagramLink: unit.Instagram,
@@ -53,7 +63,7 @@ const UnitsSection = () => {
           distanceKm: unit.distanceKm,
           isClosest: geoEnabled && index === 0 && unit.distanceKm !== undefined,
           isPromotion: isPromotion,
-          isComingSoon: unit['Em Breve'] === true || String(unit['Em Breve']).toLowerCase() === 'true',
+          isComingSoon: (unit.Categoria ? String(unit.Categoria).trim().toLowerCase() === 'em breve' : false) || unit['Em Breve'] === true || String(unit['Em Breve']).toLowerCase() === 'true',
           idBranch: unit.idBranch ? Number(unit.idBranch) : getIdBranchFallback(unit.Unidade),
           modalidade: unit.Modalidade,
           tier: getTier(unit.Unidade),

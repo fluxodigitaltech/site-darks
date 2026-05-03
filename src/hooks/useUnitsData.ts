@@ -6,21 +6,22 @@ import { calculateDistance, Coordinates } from "@/lib/geolocation";
 export interface NocoDBUnit {
   Id: number; // NocoDB usa 'Id' para o ID do registro
   Unidade: string;
-  Endereco: string; // Mantendo Endereco para a exibição pública
+  Endereco?: string; // Endereço público (pode estar vazio se a coluna não existir)
   Horario: string;
   Modalidade?: string;
-  Foto?: string; // URL da foto
+  Foto?: string; // URL ou attachment da foto
   WhatsApp?: string;
   Descricao?: string;
   Latitude: number;
   Longitude: number;
   Status?: string;
   DataCadastro?: string;
-  Promocao?: boolean; // Assumindo boolean para 'Promocao'
-  Instagram?: string; // URL do Instagram
-  'Link de compra'?: string; // Link de compra
-  'Em Breve'?: boolean; // Assumindo boolean para 'Em Breve'
-  idBranch?: number; // NOVO: ID da filial da API EVO
+  Categoria?: string; // 'Funcionando' | 'Em Breve' (substitui o antigo campo "Em Breve")
+  Promocao?: boolean | string; // boolean ou SingleSelect ("Sim"/"Não")
+  Instagram?: string;
+  'Link de compra'?: string;
+  'Em Breve'?: boolean; // mantido para retro-compatibilidade
+  idBranch?: number; // ID da filial da API EVO
 }
 
 export interface UnitWithDistance extends NocoDBUnit {
