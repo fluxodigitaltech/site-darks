@@ -48,10 +48,14 @@ import {
 } from "@/components/ui/alert-dialog";
 import { NocoDBUnit } from "@/hooks/useUnitsData";
 
-const NOCODB_API_BASE_URL = "https://auto-nocodb.fesqdn.easypanel.host/api/v2/tables";
-const NOCODB_TABLE_ID = "m02vprrpto5vac3";
-const NOCODB_VIEW_ID = "vw97xyuevbzk8sj0";
-const NOCODB_API_TOKEN = import.meta.env.VITE_NOCODB_API_TOKEN; // Usando variável de ambiente
+// Configurações da API NocoDB lidas das variáveis de ambiente.
+const NOCODB_BASE_URL =
+  import.meta.env.VITE_NOCODB_BASE_URL ?? "https://desk-nocodb.5y4hfw.easypanel.host";
+const NOCODB_API_BASE_URL = `${NOCODB_BASE_URL}/api/v2/tables`;
+const NOCODB_TABLE_ID =
+  import.meta.env.VITE_NOCODB_UNITS_TABLE_ID ?? "mm3pfo9m30lo9zm";
+const NOCODB_VIEW_ID = import.meta.env.VITE_NOCODB_UNITS_VIEW_ID; // opcional
+const NOCODB_API_TOKEN = import.meta.env.VITE_NOCODB_API_TOKEN;
 
 const headers = {
   "Content-Type": "application/json",
@@ -109,7 +113,9 @@ const AdminUnits: React.FC = () => {
   const { data: units, isLoading, isError, refetch } = useQuery<NocoDBUnit[], Error>({
     queryKey: ["adminUnits"],
     queryFn: async () => {
-      const url = `${NOCODB_API_BASE_URL}/${NOCODB_TABLE_ID}/records?viewId=${NOCODB_VIEW_ID}&limit=100&sort=-Id`;
+      const params = new URLSearchParams({ limit: "100", sort: "-Id" });
+      if (NOCODB_VIEW_ID) params.set("viewId", NOCODB_VIEW_ID);
+      const url = `${NOCODB_API_BASE_URL}/${NOCODB_TABLE_ID}/records?${params.toString()}`;
       const response = await fetch(url, { headers });
       if (!response.ok) {
         throw new Error(`Erro ao carregar unidades: ${response.statusText}`);
