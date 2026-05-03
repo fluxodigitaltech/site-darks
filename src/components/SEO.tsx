@@ -1,43 +1,37 @@
-import React from 'react';
-import { Helmet } from 'react-helmet-async';
+import React from "react";
+import { Helmet } from "react-helmet-async";
+
+const SITE_URL = "https://www.darksgym.com.br";
+const SITE_NAME = "DARK'SGYM";
+const DEFAULT_IMAGE = `${SITE_URL}/og-image.png`;
 
 interface SEOProps {
+  /** Título da página. Se omitido, usa o padrão da home. */
   title?: string;
+  /** Descrição (≤ 160 caracteres ideal). */
   description?: string;
+  /** Imagem para preview (Open Graph + Twitter). URL absoluta. */
   imageUrl?: string;
-  url?: string;
+  /** Caminho relativo (ex.: "/trabalhe-conosco"). Será concatenado ao SITE_URL. */
+  path?: string;
+  /** Se true, instrui buscadores a NÃO indexar a página (útil para /admin). */
+  noindex?: boolean;
+  /** Tipo Open Graph (default: website). Use "article" em posts. */
+  type?: "website" | "article" | "profile";
 }
 
 const SEO: React.FC<SEOProps> = ({
-  title = "DARK'SGYM | Elite Fitness & Treinamento 24h",
-  description = "Domine seu corpo na DARK'SGYM. Equipamentos de ponta, ambiente de elite e funcionamento 24 horas. Encontre a unidade mais próxima e comece seu legado.",
-  imageUrl = "https://raw.githubusercontent.com/fluxodigitaltech/img-darks/main/DSC01359.jpg",
-  url = "https://www.darksgym.com.br", // IMPORTANTE: Atualize com seu domínio final
+  title,
+  description = "DARK'SGYM: rede de academias 24h com equipamentos de elite em Santo André, Mauá e Ribeirão Pires. Musculação, lutas, spinning e mais. Encontre a unidade mais próxima.",
+  imageUrl = DEFAULT_IMAGE,
+  path = "/",
+  noindex = false,
+  type = "website",
 }) => {
-  const fullTitle = `${title}`;
-  const siteName = "DARK'SGYM";
-
-  // Schema.org para dados estruturados (JSON-LD)
-  const structuredData = {
-    '@context': 'https://schema.org',
-    '@type': 'SportsClub',
-    name: "DARK'SGYM",
-    description: description,
-    image: imageUrl,
-    url: url,
-    telephone: '+5511999999999',
-    priceRange: '$$',
-    address: {
-      '@type': 'PostalAddress',
-      streetAddress: 'Av. Martim Francisco, 786',
-      addressLocality: 'Santo André',
-      addressRegion: 'SP',
-      postalCode: '09230-700',
-      addressCountry: 'BR',
-    },
-    openingHours: 'Mo,Tu,We,Th,Fr,Sa,Su 00:00-23:59',
-    sameAs: ['https://www.instagram.com/darks.gym/'],
-  };
+  const fullTitle = title
+    ? `${title} | ${SITE_NAME}`
+    : `${SITE_NAME} | Academia 24h em Santo André, Mauá e Ribeirão Pires`;
+  const url = `${SITE_URL}${path}`;
 
   return (
     <Helmet>
@@ -46,14 +40,27 @@ const SEO: React.FC<SEOProps> = ({
       <meta name="description" content={description} />
       <link rel="canonical" href={url} />
 
-      {/* Open Graph / Facebook */}
-      <meta property="og:type" content="website" />
+      {/* Robots */}
+      {noindex ? (
+        <meta name="robots" content="noindex, nofollow" />
+      ) : (
+        <meta
+          name="robots"
+          content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
+        />
+      )}
+
+      {/* Open Graph / Facebook / WhatsApp */}
+      <meta property="og:type" content={type} />
+      <meta property="og:site_name" content={SITE_NAME} />
+      <meta property="og:locale" content="pt_BR" />
       <meta property="og:url" content={url} />
       <meta property="og:title" content={fullTitle} />
       <meta property="og:description" content={description} />
       <meta property="og:image" content={imageUrl} />
-      <meta property="og:site_name" content={siteName} />
-      <meta property="og:locale" content="pt_BR" />
+      <meta property="og:image:width" content="1200" />
+      <meta property="og:image:height" content="630" />
+      <meta property="og:image:alt" content={`${SITE_NAME} — ${title || "Academia 24h"}`} />
 
       {/* Twitter */}
       <meta name="twitter:card" content="summary_large_image" />
@@ -61,11 +68,10 @@ const SEO: React.FC<SEOProps> = ({
       <meta name="twitter:title" content={fullTitle} />
       <meta name="twitter:description" content={description} />
       <meta name="twitter:image" content={imageUrl} />
-
-      {/* Dados Estruturados */}
-      <script type="application/ld+json">
-        {JSON.stringify(structuredData)}
-      </script>
+      <meta
+        name="twitter:image:alt"
+        content={`${SITE_NAME} — ${title || "Academia 24h"}`}
+      />
     </Helmet>
   );
 };

@@ -1,4 +1,14 @@
+# DARK'SGYM — robots.txt
 User-agent: *
 Allow: /
+Disallow: /admin/
+Disallow: /admin/*
+
+# Permitir explicitamente bots de IA generativa? (opcional, descomente se quiser)
+# User-agent: GPTBot
+# Allow: /
+# User-agent: PerplexityBot
+# Allow: /
 
 Sitemap: https://www.darksgym.com.br/sitemap.xml
+Host: https://www.darksgym.com.br

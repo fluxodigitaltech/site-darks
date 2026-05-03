@@ -5,10 +5,16 @@ import CareersForm from "@/components/CareersForm";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import FadeIn from "@/components/FadeIn";
+import SEO from "@/components/SEO";
 
 const Careers: React.FC = () => {
   return (
     <div className="min-h-screen bg-black">
+      <SEO
+        title="Trabalhe Conosco"
+        description="Vagas abertas na DARK'SGYM: instrutores, consultores de vendas, gestores e mais. Faça parte do time da rede de academias 24h que mais cresce."
+        path="/trabalhe-conosco"
+      />
       <Header />
       
       <main className="pt-32 pb-24">

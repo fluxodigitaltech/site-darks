@@ -10,9 +10,10 @@ import FadeIn from "@/components/FadeIn";
 const InvestorPage: React.FC = () => {
   return (
     <div className="min-h-screen bg-black selection:bg-white selection:text-black overflow-x-hidden">
-      <SEO 
-        title="Seja um Investidor | DARK'SGYM" 
-        description="Invista na rede de academias que mais cresce. Faça parte do legado DARK'SGYM."
+      <SEO
+        title="Seja um Investidor"
+        description="Invista na DARK'SGYM, a rede de academias 24h que mais cresce no ABC. Saiba como se tornar parceiro estratégico das próximas unidades."
+        path="/seja-um-investidor"
       />
       
       <Header />

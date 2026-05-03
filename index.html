@@ -2,27 +2,123 @@
 <html lang="pt-BR" class="dark">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    
-    <!-- Título e Descrição Padrão -->
-    <title>DARK'SGYM | Elite Fitness & Treinamento 24h</title>
-    <meta name="description" content="Domine seu corpo na DARK'SGYM. Equipamentos de ponta, ambiente de elite e funcionamento 24 horas. Encontre a unidade mais próxima e comece seu legado." />
-    
-    <!-- Favicon -->
-    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/fluxodigitaltech/img-darks/refs/heads/main/Design%20sem%20nome%20(6).png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
-    <!-- Open Graph / Facebook Meta Tags -->
-    <meta property="og:title" content="DARK'SGYM | Elite Fitness & Treinamento 24h" />
-    <meta property="og:description" content="Domine seu corpo na DARK'SGYM. Equipamentos de ponta, ambiente de elite e funcionamento 24 horas. Encontre a unidade mais próxima e comece seu legado." />
-    <meta property="og:image" content="https://raw.githubusercontent.com/fluxodigitaltech/img-darks/main/DSC01359.jpg" />
-    <meta property="og:url" content="https://www.darksgym.com.br" />
+    <!-- Identidade -->
+    <title>DARK'SGYM | Academia 24h em Santo André, Mauá e Ribeirão Pires</title>
+    <meta name="description" content="DARK'SGYM: rede de academias 24h com equipamentos de elite em Santo André, Mauá e Ribeirão Pires. Musculação, lutas, spinning, FitDance e mais. Encontre a unidade mais próxima e comece seu legado." />
+    <meta name="keywords" content="academia 24 horas, academia santo andré, academia mauá, academia ribeirão pires, musculação, dark's gym, darksgym, academia premium ABC" />
+    <meta name="author" content="DARK'SGYM" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <meta name="googlebot" content="index, follow" />
+    <meta name="theme-color" content="#000000" />
+    <meta name="application-name" content="DARK'SGYM" />
+    <meta name="apple-mobile-web-app-title" content="DARK'SGYM" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="format-detection" content="telephone=no" />
+
+    <!-- Canonical -->
+    <link rel="canonical" href="https://www.darksgym.com.br/" />
+
+    <!-- Favicons (sobrescrevem o padrão do Dyad) -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <link rel="mask-icon" href="/icon-512.png" color="#000000" />
+
+    <!-- Pré-conexões para acelerar carregamento -->
+    <link rel="preconnect" href="https://raw.githubusercontent.com" crossorigin />
+    <link rel="preconnect" href="https://desk-nocodb.5y4hfw.easypanel.host" crossorigin />
+    <link rel="dns-prefetch" href="https://evo-integracao-api.w12app.com.br" />
+
+    <!-- Open Graph / Facebook / WhatsApp -->
     <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="DARK'SGYM" />
+    <meta property="og:locale" content="pt_BR" />
+    <meta property="og:url" content="https://www.darksgym.com.br/" />
+    <meta property="og:title" content="DARK'SGYM | Academia 24h em Santo André, Mauá e Ribeirão Pires" />
+    <meta property="og:description" content="Rede de academias 24h com equipamentos de elite. Encontre a unidade mais próxima e comece seu legado." />
+    <meta property="og:image" content="https://www.darksgym.com.br/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="DARK'SGYM — academia 24h" />
 
-    <!-- Twitter Card Meta Tags -->
+    <!-- Twitter / X -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="DARK'SGYM | Elite Fitness & Treinamento 24h" />
-    <meta name="twitter:description" content="Domine seu corpo na DARK'SGYM. Equipamentos de ponta, ambiente de elite e funcionamento 24 horas. Encontre a unidade mais próxima e comece seu legado." />
-    <meta name="twitter:image" content="https://raw.githubusercontent.com/fluxodigitaltech/img-darks/main/DSC01359.jpg" />
+    <meta name="twitter:site" content="@darksgym" />
+    <meta name="twitter:title" content="DARK'SGYM | Academia 24h em Santo André, Mauá e Ribeirão Pires" />
+    <meta name="twitter:description" content="Rede de academias 24h com equipamentos de elite. Encontre a unidade mais próxima e comece seu legado." />
+    <meta name="twitter:image" content="https://www.darksgym.com.br/og-image.png" />
+    <meta name="twitter:image:alt" content="DARK'SGYM — academia 24h" />
+
+    <!-- Geo / Localização (ajuda buscas locais) -->
+    <meta name="geo.region" content="BR-SP" />
+    <meta name="geo.placename" content="Santo André" />
+    <meta name="geo.position" content="-23.6622;-46.5310" />
+    <meta name="ICBM" content="-23.6622, -46.5310" />
+
+    <!-- Schema.org / JSON-LD: organização + cadeia de academias -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Organization",
+          "@id": "https://www.darksgym.com.br/#organization",
+          "name": "DARK'SGYM",
+          "url": "https://www.darksgym.com.br/",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://www.darksgym.com.br/icon-512.png",
+            "width": 512,
+            "height": 512
+          },
+          "sameAs": [
+            "https://www.instagram.com/darks.gym/"
+          ]
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https://www.darksgym.com.br/#website",
+          "url": "https://www.darksgym.com.br/",
+          "name": "DARK'SGYM",
+          "description": "Rede de academias 24h com equipamentos de elite no ABC paulista.",
+          "publisher": { "@id": "https://www.darksgym.com.br/#organization" },
+          "inLanguage": "pt-BR"
+        },
+        {
+          "@type": "SportsActivityLocation",
+          "name": "DARK'SGYM",
+          "url": "https://www.darksgym.com.br/",
+          "image": "https://www.darksgym.com.br/og-image.png",
+          "telephone": "+55-11-0000-0000",
+          "priceRange": "$$",
+          "openingHours": "Mo,Tu,We,Th,Fr,Sa,Su 00:00-23:59",
+          "address": {
+            "@type": "PostalAddress",
+            "addressCountry": "BR",
+            "addressRegion": "SP",
+            "addressLocality": "Santo André"
+          },
+          "areaServed": [
+            { "@type": "City", "name": "Santo André" },
+            { "@type": "City", "name": "Mauá" },
+            { "@type": "City", "name": "Ribeirão Pires" }
+          ],
+          "amenityFeature": [
+            { "@type": "LocationFeatureSpecification", "name": "Aberto 24 horas", "value": true },
+            { "@type": "LocationFeatureSpecification", "name": "Musculação", "value": true },
+            { "@type": "LocationFeatureSpecification", "name": "Lutas / Artes Marciais", "value": true },
+            { "@type": "LocationFeatureSpecification", "name": "Spinning", "value": true }
+          ]
+        }
+      ]
+    }
+    </script>
   </head>
 
   <body>
