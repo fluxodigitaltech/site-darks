@@ -281,14 +281,14 @@ const UnitCard: React.FC<UnitCardProps> = ({ unit, allMemberships }) => {
               <h4 className="text-center text-xs font-bold uppercase tracking-widest text-white/70 mb-3">
                 Selecione seu Plano
               </h4>
-              <div className="flex justify-center gap-2 mb-3">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 mb-3">
                 {availableMemberships.map((plan) => (
                   <Button
                     key={plan.idMembership}
                     size="sm"
                     variant="outline"
                     className={cn(
-                      "h-auto min-h-[36px] py-2 px-3 rounded-full text-[10px] font-bold transition-all duration-300 flex-1 leading-tight",
+                      "h-auto min-h-[40px] py-2 px-3 rounded-full text-[10px] font-bold transition-all duration-300 leading-tight whitespace-normal text-center break-words",
                       selectedPlan?.idMembership === plan.idMembership
                         ? "bg-primary text-primary-foreground border-primary shadow-md shadow-primary/30"
                         : "bg-transparent text-white/70 border-white/20 hover:bg-white/10 hover:text-white"
