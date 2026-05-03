@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useMemo } from "react";
-import { MapPin, MessageSquare, ShoppingCart, Instagram, Tag, Cpu, Zap, Star, Gem } from "lucide-react";
+import { MapPin, MessageSquare, ShoppingCart, Instagram, Tag, Cpu, Zap, Star, Gem, Clock } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { Badge } from "@/components/ui/badge";
@@ -207,11 +207,35 @@ const UnitCard: React.FC<UnitCardProps> = ({ unit, allMemberships }) => {
           )}
         </div>
 
+        {/* Gradiente para garantir legibilidade do nome sobre a foto */}
+        <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-black via-black/60 to-transparent pointer-events-none z-0" />
+
         <div className="absolute bottom-4 left-4 right-4 z-10">
-          <h3 className="font-black italic uppercase tracking-tighter leading-none text-3xl text-white mb-1">{unit.name}</h3>
-          <p className="text-xs text-white/70 font-medium">{unit.address}</p>
+          <h3 className="font-black italic uppercase tracking-tighter leading-none text-3xl text-white drop-shadow-lg">{unit.name}</h3>
         </div>
       </div>
+
+      {/* Faixa dedicada para endereço + horário, abaixo da imagem */}
+      {(unit.address || unit.hours) && (
+        <div className="px-4 pt-4 pb-2 space-y-2 border-b border-white/5">
+          {unit.address && (
+            <div className="flex items-start gap-2 text-white/80">
+              <MapPin size={14} className="mt-0.5 flex-shrink-0 text-primary" />
+              <p className="text-xs font-medium leading-snug break-words">
+                {unit.address}
+              </p>
+            </div>
+          )}
+          {unit.hours && (
+            <div className="flex items-center gap-2 text-white/50">
+              <Clock size={12} className="flex-shrink-0" />
+              <p className="text-[10px] font-bold uppercase tracking-widest">
+                {unit.hours}
+              </p>
+            </div>
+          )}
+        </div>
+      )}
 
       <div className="p-4 flex flex-col flex-grow">
         <div className="flex-grow flex flex-col justify-between">
