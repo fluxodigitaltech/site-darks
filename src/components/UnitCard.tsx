@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useMemo } from "react";
-import { MapPin, MessageSquare, ShoppingCart, Instagram, Tag, Cpu, Zap, Star, Gem, Clock } from "lucide-react";
+import { MapPin, MessageSquare, ShoppingCart, Instagram, Tag, Zap, Star, Gem, Clock, Headset, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { Badge } from "@/components/ui/badge";
@@ -341,31 +341,69 @@ const UnitCard: React.FC<UnitCardProps> = ({ unit, allMemberships }) => {
 
             </div>
           ) : (
-            <div className="flex-grow flex flex-col justify-center items-center text-center text-white/50 bg-zinc-900/70 backdrop-blur-sm border border-white/10 p-4 rounded-lg mb-4">
-              <Cpu className="w-10 h-10 mb-3 animate-pulse text-white/20" />
-              <p className="text-sm">Nenhum plano encontrado.</p>
-              <p className="text-xs">Verifique o 'ID Filial (EVO API)'.</p>
+            /* Atendimento exclusivo via WhatsApp — quando a unidade ainda não tem
+               integração EVO ou não há plano cadastrado */
+            <div className="flex-grow flex flex-col justify-center items-center text-center bg-gradient-to-b from-zinc-900/80 to-black/60 backdrop-blur-sm border border-white/10 p-5 rounded-lg mb-3 relative overflow-hidden">
+              <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.05)_0%,transparent_70%)] pointer-events-none" />
+              <div className="relative z-10 flex flex-col items-center">
+                <div className="flex items-center justify-center w-12 h-12 rounded-full bg-white/5 border border-white/10 mb-3">
+                  <Headset className="w-6 h-6 text-white" />
+                </div>
+                <p className="text-[10px] font-black uppercase tracking-[0.4em] text-white/40 mb-1">
+                  Exclusivo
+                </p>
+                <p className="text-xl sm:text-2xl font-black italic uppercase tracking-tighter text-white leading-none mb-2">
+                  Atendimento <br className="hidden sm:block" />Personalizado
+                </p>
+                <p className="text-xs text-white/50 font-medium leading-relaxed max-w-[260px]">
+                  Plano sob medida e condições especiais direto com nosso time.
+                </p>
+                <div className="flex items-center gap-1.5 mt-3 text-[9px] font-bold uppercase tracking-widest text-white/30">
+                  <Sparkles size={10} />
+                  Resposta no mesmo dia
+                </div>
+              </div>
             </div>
           )}
 
           {!unit.isComingSoon && (
             <div>
-              <Button
-                size="sm"
-                className="h-10 w-full rounded-md bg-white text-black font-black text-[10px] uppercase tracking-widest hover:bg-zinc-200 mb-2 transition-all duration-300"
-                asChild
-                disabled={!purchaseUrl}
-              >
-                <a href={purchaseUrl || '#'} target="_blank" rel="noopener noreferrer">
-                  <ShoppingCart size={12} className="mr-2" /> MATRICULAR
-                </a>
-              </Button>
+              {selectedPlan ? (
+                /* Botão padrão: matrícula online */
+                <Button
+                  size="sm"
+                  className="h-12 w-full rounded-md bg-white text-black font-black text-xs uppercase tracking-widest hover:bg-zinc-200 mb-2 transition-all duration-300"
+                  asChild
+                  disabled={!purchaseUrl}
+                >
+                  <a href={purchaseUrl || '#'} target="_blank" rel="noopener noreferrer">
+                    <ShoppingCart size={14} className="mr-2" /> MATRICULAR
+                  </a>
+                </Button>
+              ) : (
+                /* CTA principal vira WhatsApp quando não tem plano online */
+                <Button
+                  size="sm"
+                  className="h-12 w-full rounded-md bg-[#25D366] text-black font-black text-xs uppercase tracking-widest hover:bg-[#20bd5a] mb-2 transition-all duration-300 shadow-lg shadow-[#25D366]/20"
+                  asChild
+                  disabled={!whatsappLink}
+                >
+                  <a href={whatsappLink} target="_blank" rel="noopener noreferrer">
+                    <MessageSquare size={14} className="mr-2" /> Falar no WhatsApp
+                  </a>
+                </Button>
+              )}
 
               <div className="grid grid-cols-3 gap-2">
                 <Button size="sm" variant="outline" className="h-9 rounded-md border-white/20 text-white font-black text-[9px] uppercase tracking-widest hover:bg-white hover:text-black transition-all duration-300" asChild disabled={!mapsLink}>
                   <a href={mapsLink} target="_blank" rel="noopener noreferrer"><MapPin size={12} className="mr-1" /> MAPS</a>
                 </Button>
-                <Button size="sm" variant="outline" className="h-9 rounded-md border-white/20 text-white font-black text-[9px] uppercase tracking-widest hover:bg-white hover:text-black transition-all duration-300" asChild disabled={!whatsappLink}>
+                <Button size="sm" variant="outline" className={cn(
+                  "h-9 rounded-md border-white/20 text-white font-black text-[9px] uppercase tracking-widest transition-all duration-300",
+                  selectedPlan
+                    ? "hover:bg-white hover:text-black"
+                    : "opacity-50 pointer-events-none" /* botão secundário some quando o CTA principal já é WhatsApp */
+                )} asChild disabled={!whatsappLink}>
                   <a href={whatsappLink} target="_blank" rel="noopener noreferrer"><MessageSquare size={12} className="mr-1" /> WHATSAPP</a>
                 </Button>
                 <Button size="sm" variant="outline" className="h-9 rounded-md border-white/20 text-white font-black text-[9px] uppercase tracking-widest hover:bg-white hover:text-black transition-all duration-300" asChild disabled={!unit.instagramLink}>
