@@ -43,7 +43,7 @@ const Index = () => {
         </FadeIn>
 
         <FadeIn>
-          <div id="unidades" className="bg-zinc-950/50">
+          <div className="bg-zinc-950/50">
             <UnitsSection />
           </div>
         </FadeIn>

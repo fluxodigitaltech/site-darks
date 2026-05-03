@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { calculateDistance, Coordinates } from "@/lib/geolocation";
 
@@ -63,40 +64,48 @@ export function useUnitsData(userCoords: Coordinates | null) {
     queryFn: fetchUnits,
   });
 
-  // Process data to calculate distance and sort
-  const processedData = queryResult.data
-    ? queryResult.data.map((unit) => {
-        let distanceKm: number | undefined;
-        
-        // Ensure Latitude and Longitude are valid numbers before calculating
-        const unitLat = parseFloat(String(unit.Latitude));
-        const unitLon = parseFloat(String(unit.Longitude));
+  // Calcula a distância de cada unidade ao usuário e ordena por proximidade.
+  // useMemo mantém a referência estável quando os dados/coordenadas não mudam.
+  const processedData = useMemo<UnitWithDistance[]>(() => {
+    if (!queryResult.data) return [];
 
-        if (userCoords && !isNaN(unitLat) && !isNaN(unitLon)) {
-          distanceKm = calculateDistance(
-            userCoords.latitude,
-            userCoords.longitude,
-            unitLat,
-            unitLon
-          );
-        }
+    const mapped = queryResult.data.map((unit) => {
+      const unitLat = parseFloat(String(unit.Latitude));
+      const unitLon = parseFloat(String(unit.Longitude));
 
-        return {
-          ...unit,
-          distanceKm: distanceKm ? parseFloat(distanceKm.toFixed(1)) : undefined,
-        } as UnitWithDistance;
-      })
-    : [];
+      let distanceKm: number | undefined;
+      if (
+        userCoords &&
+        Number.isFinite(unitLat) &&
+        Number.isFinite(unitLon)
+      ) {
+        const raw = calculateDistance(
+          userCoords.latitude,
+          userCoords.longitude,
+          unitLat,
+          unitLon
+        );
+        distanceKm = parseFloat(raw.toFixed(1));
+      }
 
-  // Sort units by distance if user location is available
-  if (userCoords && processedData.length > 0) {
-    processedData.sort((a, b) => {
-      // Prioritize units with calculated distance
-      if (a.distanceKm === undefined) return 1;
-      if (b.distanceKm === undefined) return -1;
-      return a.distanceKm - b.distanceKm;
+      return {
+        ...unit,
+        distanceKm,
+      } as UnitWithDistance;
     });
-  }
+
+    if (userCoords && mapped.length > 0) {
+      // Cria uma cópia para não mutar o array original retornado pelo .map()
+      return [...mapped].sort((a, b) => {
+        if (a.distanceKm === undefined && b.distanceKm === undefined) return 0;
+        if (a.distanceKm === undefined) return 1;
+        if (b.distanceKm === undefined) return -1;
+        return a.distanceKm - b.distanceKm;
+      });
+    }
+
+    return mapped;
+  }, [queryResult.data, userCoords]);
 
   return {
     ...queryResult,
