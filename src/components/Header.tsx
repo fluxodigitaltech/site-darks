@@ -30,13 +30,17 @@ const Header = () => {
     <header
       className={cn(
         "fixed top-0 left-0 w-full z-[100] transition-all duration-500 border-b bg-black border-white/10",
-        isScrolled ? "py-4" : "py-6"
+        isScrolled ? "py-2 md:py-4" : "py-3 md:py-6"
       )}
     >
-      <div className="container px-6 mx-auto flex items-center justify-between">
+      <div className="container px-4 md:px-6 mx-auto flex items-center justify-between gap-2">
         {/* Logo - Image */}
-        <a href="#" className="relative group">
-          <img src={logoUrl} alt="DARK'SGYM Logo" className="h-14 w-auto transition-transform duration-300 group-hover:scale-105" />
+        <a href="#" className="relative group flex-shrink-0" aria-label="DARK'SGYM — Início">
+          <img
+            src={logoUrl}
+            alt="DARK'SGYM Logo"
+            className="h-10 md:h-14 w-auto transition-transform duration-300 group-hover:scale-105"
+          />
         </a>
 
         {/* Desktop Nav and Geolocation Indicator */}
@@ -56,11 +60,13 @@ const Header = () => {
         </div>
 
         {/* Mobile Toggle */}
-        <div className="flex items-center md:hidden">
+        <div className="flex items-center gap-2 md:hidden">
           <GeolocationStatusIndicator />
-          <button 
-            className="text-white ml-4" 
+          <button
+            className="text-white p-2 -mr-2 min-w-[44px] min-h-[44px] flex items-center justify-center"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            aria-label={mobileMenuOpen ? "Fechar menu" : "Abrir menu"}
+            aria-expanded={mobileMenuOpen}
           >
             {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
@@ -68,16 +74,19 @@ const Header = () => {
       </div>
 
       {/* Mobile Menu */}
-      <div className={cn(
-        "fixed inset-0 bg-black z-[90] flex flex-col items-center justify-center space-y-8 transition-transform duration-500 md:hidden",
-        mobileMenuOpen ? "translate-y-0" : "-translate-y-full"
-      )}>
+      <div
+        className={cn(
+          "fixed inset-0 bg-black z-[90] flex flex-col items-center justify-center space-y-6 px-6 transition-transform duration-500 md:hidden overflow-y-auto",
+          mobileMenuOpen ? "translate-y-0" : "-translate-y-full"
+        )}
+        aria-hidden={!mobileMenuOpen}
+      >
         {navLinks.map((link) => (
           <a
             key={link.name}
             href={link.href}
             onClick={() => setMobileMenuOpen(false)}
-            className="text-3xl font-black uppercase italic text-white hover:text-white/50 transition-colors"
+            className="text-2xl sm:text-3xl font-black uppercase italic text-white hover:text-white/50 transition-colors py-2 px-4"
           >
             {link.name}
           </a>

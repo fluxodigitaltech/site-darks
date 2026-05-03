@@ -15,17 +15,20 @@ const FloatingWhatsAppButton = () => {
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Fale conosco pelo WhatsApp"
+      style={{
+        bottom: "calc(1rem + env(safe-area-inset-bottom, 0px))",
+      }}
       className={cn(
-        "fixed bottom-4 right-20 sm:bottom-6 sm:right-24 z-50", // Ajustado para mobile
-        "h-12 w-12 sm:h-14 sm:w-14 rounded-full", // Tamanho ajustado
-        "bg-primary text-primary-foreground", // Usando a cor primária do tema
+        "fixed right-[4.75rem] sm:right-24 z-50",
+        "h-14 w-14 rounded-full",
+        "bg-primary text-primary-foreground",
         "flex items-center justify-center",
         "shadow-lg hover:shadow-primary/50 transition-all duration-300",
         "transform hover:scale-110",
         "hover:animate-button-glow"
       )}
     >
-      <MessageSquare className="h-6 w-6 sm:h-7 sm:w-7" />
+      <MessageSquare className="h-7 w-7" />
     </a>
   );
 };

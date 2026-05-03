@@ -24,14 +24,14 @@ const SupplementsSection = () => {
       </div>
 
       {/* Content Side */}
-      <div className="relative z-10 w-full md:w-1/2 p-8 md:p-24 flex flex-col justify-center border-b md:border-b-0 md:border-r border-white/5">
-        <div className="space-y-6 max-w-lg">
+      <div className="relative z-10 w-full md:w-1/2 px-4 py-12 md:p-24 flex flex-col justify-center border-b md:border-b-0 md:border-r border-white/5">
+        <div className="space-y-5 md:space-y-6 max-w-lg mx-auto md:mx-0">
           <div className="flex items-center gap-3">
             <div className="h-1 w-12 bg-white" />
-            <span className="text-[10px] font-black uppercase tracking-[0.5em] text-white/40">DARKS GYM</span>
+            <span className="text-[9px] md:text-[10px] font-black uppercase tracking-[0.4em] md:tracking-[0.5em] text-white/40">DARKS GYM</span>
           </div>
-          
-          <h2 className="text-5xl md:text-7xl font-black italic uppercase tracking-tighter leading-[0.9] text-white">
+
+          <h2 className="text-4xl sm:text-5xl md:text-7xl font-black italic uppercase tracking-tighter leading-[0.9] text-white">
             NUTRIÇÃO <br />
             <span className="text-transparent" style={{ WebkitTextStroke: "1px rgba(255,255,255,0.4)" }}>AVANÇADA</span>
           </h2>

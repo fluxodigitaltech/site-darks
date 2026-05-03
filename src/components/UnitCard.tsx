@@ -269,7 +269,7 @@ const UnitCard: React.FC<UnitCardProps> = ({ unit, allMemberships }) => {
                     size="sm"
                     variant="outline"
                     className={cn(
-                      "h-auto py-1.5 px-3 rounded-full text-[10px] font-bold transition-all duration-300 flex-1",
+                      "h-auto min-h-[36px] py-2 px-3 rounded-full text-[10px] font-bold transition-all duration-300 flex-1 leading-tight",
                       selectedPlan?.idMembership === plan.idMembership
                         ? "bg-primary text-primary-foreground border-primary shadow-md shadow-primary/30"
                         : "bg-transparent text-white/70 border-white/20 hover:bg-white/10 hover:text-white"

@@ -9,9 +9,12 @@ const FloatingInstagramButton = () => {
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Siga-nos no Instagram"
+      style={{
+        bottom: "calc(1rem + env(safe-area-inset-bottom, 0px))",
+      }}
       className={cn(
-        "fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50", // Ajustado para mobile
-        "h-12 w-12 sm:h-14 sm:w-14 rounded-full", // Tamanho ajustado
+        "fixed right-4 sm:right-6 z-50",
+        "h-14 w-14 rounded-full",
         "bg-primary text-primary-foreground",
         "flex items-center justify-center",
         "shadow-lg hover:shadow-primary/50 transition-all duration-300",
@@ -19,7 +22,7 @@ const FloatingInstagramButton = () => {
         "hover:animate-button-glow"
       )}
     >
-      <Instagram className="h-6 w-6 sm:h-7 sm:w-7" />
+      <Instagram className="h-7 w-7" />
     </a>
   );
 };

@@ -110,9 +110,10 @@ const CareersForm: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <div className="space-y-2">
             <Label htmlFor="Nome" className="text-[10px] font-black uppercase tracking-[0.3em] text-white/40">Nome Completo</Label>
-            <Input 
-              id="Nome" 
-              {...form.register("Nome")} 
+            <Input
+              id="Nome"
+              {...form.register("Nome")}
+              autoComplete="name"
               className="bg-white/5 border-white/10 rounded-none h-12 focus:border-white/30 transition-all"
               placeholder="SEU NOME"
             />
@@ -121,10 +122,14 @@ const CareersForm: React.FC = () => {
 
           <div className="space-y-2">
             <Label htmlFor="Email" className="text-[10px] font-black uppercase tracking-[0.3em] text-white/40">E-mail de Contato</Label>
-            <Input 
-              id="Email" 
-              type="email" 
-              {...form.register("Email")} 
+            <Input
+              id="Email"
+              type="email"
+              inputMode="email"
+              autoComplete="email"
+              autoCapitalize="off"
+              autoCorrect="off"
+              {...form.register("Email")}
               className="bg-white/5 border-white/10 rounded-none h-12 focus:border-white/30 transition-all"
               placeholder="EMAIL@EXEMPLO.COM"
             />
@@ -133,9 +138,12 @@ const CareersForm: React.FC = () => {
 
           <div className="space-y-2">
             <Label htmlFor="Telefone" className="text-[10px] font-black uppercase tracking-[0.3em] text-white/40">WhatsApp / Telefone</Label>
-            <Input 
-              id="Telefone" 
-              {...form.register("Telefone")} 
+            <Input
+              id="Telefone"
+              type="tel"
+              inputMode="tel"
+              autoComplete="tel"
+              {...form.register("Telefone")}
               className="bg-white/5 border-white/10 rounded-none h-12 focus:border-white/30 transition-all"
               placeholder="(00) 00000-0000"
             />

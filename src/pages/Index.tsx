@@ -27,8 +27,8 @@ const Index = () => {
       </div>
 
       <Header />
-      
-      <main className="relative z-10">
+
+      <main className="relative z-10 pb-20 md:pb-0">
         <HeroSection />
         
         <FadeIn>
@@ -59,13 +59,13 @@ const Index = () => {
         </FadeIn>
 
         <FadeIn>
-          <div className="relative pt-32 pb-16 bg-black">
+          <div className="relative pt-16 md:pt-32 pb-16 bg-black">
             <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-white/20 to-transparent" />
-            
-            <div className="mb-24">
-              <div className="text-center mb-16 space-y-4">
-                <span className="text-[10px] font-black text-white/20 uppercase tracking-[0.8em]">Performance</span>
-                <h2 className="text-4xl md:text-6xl font-black italic uppercase tracking-tighter text-white">
+
+            <div className="mb-12 md:mb-24">
+              <div className="text-center mb-8 md:mb-16 space-y-3 md:space-y-4 px-4">
+                <span className="text-[9px] md:text-[10px] font-black text-white/20 uppercase tracking-[0.5em] md:tracking-[0.8em]">Performance</span>
+                <h2 className="text-3xl md:text-6xl font-black italic uppercase tracking-tighter text-white">
                   Métricas
                 </h2>
               </div>

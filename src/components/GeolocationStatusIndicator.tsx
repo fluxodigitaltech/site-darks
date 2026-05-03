@@ -40,10 +40,10 @@ const GeolocationStatusIndicator: React.FC = () => {
   const showRefetchButton = isEnabled && !!error && isSupported;
 
   return (
-    <div className="flex items-center space-x-3">
-      {/* Switch para Ativar/Desativar */}
-      <div className="flex items-center space-x-2">
-        <span className="text-xs text-muted-foreground hidden sm:inline">
+    <div className="flex items-center space-x-2 md:space-x-3">
+      {/* Switch para Ativar/Desativar — escondido em telas muito pequenas */}
+      <div className="hidden sm:flex items-center space-x-2">
+        <span className="text-xs text-muted-foreground hidden md:inline">
           Localização
         </span>
         <Switch
@@ -56,10 +56,13 @@ const GeolocationStatusIndicator: React.FC = () => {
         />
       </div>
 
-      {/* Ícone de Status */}
-      <div
+      {/* Ícone de Status — também serve como toggle no mobile (touch target 44x44) */}
+      <button
+        type="button"
+        onClick={toggle}
+        disabled={!isSupported}
         className={cn(
-          "p-2 rounded-full transition-colors duration-300",
+          "p-2 rounded-full transition-colors duration-300 min-w-[44px] min-h-[44px] flex items-center justify-center sm:cursor-default",
           className
         )}
         role="status"
@@ -68,11 +71,16 @@ const GeolocationStatusIndicator: React.FC = () => {
         title={statusLabel}
       >
         {icon}
-      </div>
+      </button>
 
-      {/* Botão de Tentar Novamente (se houver erro) */}
+      {/* Botão de Tentar Novamente (se houver erro) — escondido no mobile pra economizar espaço */}
       {showRefetchButton && (
-        <Button onClick={refetch} size="sm" variant="outline" className="h-8">
+        <Button
+          onClick={refetch}
+          size="sm"
+          variant="outline"
+          className="h-8 hidden sm:inline-flex"
+        >
           Tentar Novamente
         </Button>
       )}

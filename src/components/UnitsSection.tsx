@@ -147,30 +147,30 @@ const UnitsSection = () => {
   }, [units, selectedModality, allMemberships]);
 
   return (
-    <section className="py-24 bg-black relative overflow-hidden" id="unidades">
+    <section className="py-16 md:py-24 bg-black relative overflow-hidden" id="unidades">
       <div className="absolute top-0 left-0 w-full overflow-hidden pointer-events-none opacity-[0.02] select-none">
         <h2 className="text-[25vw] font-black italic uppercase leading-none -translate-x-10">LOCATIONS</h2>
       </div>
 
-      <div className="container mx-auto px-6 relative z-10">
-        <div className="text-center mb-12">
-          <h2 className="text-5xl md:text-7xl font-black italic uppercase tracking-tighter text-white">
+      <div className="container mx-auto px-4 md:px-6 relative z-10">
+        <div className="text-center mb-8 md:mb-12">
+          <h2 className="text-4xl sm:text-5xl md:text-7xl font-black italic uppercase tracking-tighter text-white">
             NOSSAS <span className="text-transparent transition-all duration-500 [-webkit-text-stroke:1px_rgba(255,255,255,0.6)]">UNIDADES</span>
           </h2>
-          <p className="text-[10px] font-black uppercase tracking-[0.5em] text-white/30 mt-2">Operação Global 24/7</p>
+          <p className="text-[9px] md:text-[10px] font-black uppercase tracking-[0.4em] md:tracking-[0.5em] text-white/30 mt-2">Operação Global 24/7</p>
         </div>
 
         {/* Filtro de Modalidade com Botões */}
-        <div className="mb-16 p-4 rounded-lg bg-zinc-950/50 border border-white/10">
-          <p className="text-center text-sm font-bold uppercase tracking-widest text-white/70 mb-4">
+        <div className="mb-10 md:mb-16 p-3 md:p-4 rounded-lg bg-zinc-950/50 border border-white/10">
+          <p className="text-center text-xs md:text-sm font-bold uppercase tracking-widest text-white/70 mb-3 md:mb-4">
             Filtre por Modalidade
           </p>
-          <div className="flex flex-wrap justify-center items-center gap-3">
+          <div className="flex flex-wrap justify-center items-center gap-2 md:gap-3">
             <Button
               size="sm"
               onClick={() => setSelectedModality("all")}
               className={cn(
-                "rounded-full font-bold transition-all duration-300",
+                "rounded-full font-bold transition-all duration-300 min-h-[40px]",
                 selectedModality === "all"
                   ? "bg-primary text-primary-foreground shadow-md shadow-primary/30"
                   : "bg-zinc-800 text-white/70 hover:bg-zinc-700 hover:text-white"
@@ -184,7 +184,7 @@ const UnitsSection = () => {
                 size="sm"
                 onClick={() => setSelectedModality(modality)}
                 className={cn(
-                  "rounded-full font-bold transition-all duration-300",
+                  "rounded-full font-bold transition-all duration-300 min-h-[40px]",
                   selectedModality === modality
                     ? "bg-primary text-primary-foreground shadow-md shadow-primary/30"
                     : "bg-zinc-800 text-white/70 hover:bg-zinc-700 hover:text-white"

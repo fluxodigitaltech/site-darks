@@ -14,7 +14,7 @@ const ProgramCard = ({
   index: number
 }) => (
   <div className={cn(
-    "premium-card group p-8 flex flex-col justify-between transition-all duration-700 hover:bg-white/[0.02] h-full cursor-default",
+    "premium-card group p-6 md:p-8 flex flex-col justify-between transition-all duration-700 hover:bg-white/[0.02] h-full cursor-default",
   )}>
     {/* Background Number for visual interest */}
     <span className="absolute -bottom-4 -right-2 text-9xl font-black text-white/[0.02] select-none group-hover:text-white/[0.05] transition-colors duration-700 italic">
@@ -76,22 +76,21 @@ const ProgramsSection = () => {
   ];
 
   return (
-    <section className="py-16 relative">
+    <section className="py-12 md:py-16 relative">
       {/* Decorative vertical lines */}
       <div className="absolute top-0 left-1/4 w-[1px] h-full bg-gradient-to-b from-transparent via-white/5 to-transparent hidden lg:block"></div>
       <div className="absolute top-0 right-1/4 w-[1px] h-full bg-gradient-to-b from-transparent via-white/5 to-transparent hidden lg:block"></div>
 
-      <div className="relative z-10 container mx-auto px-6 mb-20">
+      <div className="relative z-10 container mx-auto px-4 md:px-6 mb-12 md:mb-20">
         <div className="max-w-4xl group/title">
-          <div className="inline-block px-4 py-1 mb-6 border border-white/10 rounded-full bg-white/5">
-            <p className="text-white/40 font-bold tracking-[0.4em] uppercase text-[10px]">Padrão Internacional</p>
+          <div className="inline-block px-3 md:px-4 py-1 mb-4 md:mb-6 border border-white/10 rounded-full bg-white/5">
+            <p className="text-white/40 font-bold tracking-[0.3em] md:tracking-[0.4em] uppercase text-[9px] md:text-[10px]">Padrão Internacional</p>
           </div>
-          
-          {/* Título em uma linha com estilo de contorno, agora com stroke branco (opacidade 1) */}
-          <h2 className="text-5xl md:text-7xl font-black text-white italic uppercase tracking-tighter leading-none">
-            Diferenciais 
-            <span 
-              className="block sm:inline text-transparent transition-all duration-500 sm:ml-4" 
+
+          <h2 className="text-4xl sm:text-5xl md:text-7xl font-black text-white italic uppercase tracking-tighter leading-none">
+            Diferenciais
+            <span
+              className="block sm:inline text-transparent transition-all duration-500 sm:ml-4"
               style={{ WebkitTextStroke: "1px rgba(255,255,255,1)" }}
             >
               DE ELITE
@@ -99,13 +98,13 @@ const ProgramsSection = () => {
           </h2>
         </div>
       </div>
-      
-      <div className="container mx-auto px-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+      <div className="container mx-auto px-4 md:px-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
         {programs.map((program, index) => (
-          <ProgramCard 
-            key={program.title} 
+          <ProgramCard
+            key={program.title}
             index={index}
-            {...program} 
+            {...program}
           />
         ))}
       </div>

@@ -27,8 +27,11 @@ const Footer = () => {
   const whatsappLink = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
 
   return (
-    <footer className="bg-secondary border-t border-border mt-16">
-      <div className="container mx-auto px-4 md:px-8 py-12 md:py-16">
+    <footer
+      className="bg-secondary border-t border-border mt-16"
+      style={{ paddingBottom: "env(safe-area-inset-bottom, 0px)" }}
+    >
+      <div className="container mx-auto px-4 md:px-8 py-10 md:py-16 pb-24 md:pb-16">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Logo and Brand Info */}
           <div className="md:col-span-2 flex flex-col items-center md:items-start text-center md:text-left">

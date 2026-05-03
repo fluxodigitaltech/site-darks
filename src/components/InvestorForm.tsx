@@ -104,10 +104,14 @@ const InvestorForm: React.FC = () => {
 
           <div className="space-y-2">
             <Label htmlFor="Email" className="text-[10px] font-black uppercase tracking-[0.3em] text-white/40">E-mail</Label>
-            <Input 
-              id="Email" 
-              type="email" 
-              {...form.register("Email")} 
+            <Input
+              id="Email"
+              type="email"
+              inputMode="email"
+              autoComplete="email"
+              autoCapitalize="off"
+              autoCorrect="off"
+              {...form.register("Email")}
               className="bg-white/5 border-white/10 rounded-none h-12 focus:border-white/30 transition-all uppercase placeholder:text-white/10"
               placeholder="EMAIL@EXEMPLO.COM"
             />
@@ -116,9 +120,12 @@ const InvestorForm: React.FC = () => {
 
           <div className="space-y-2">
             <Label htmlFor="WhatsApp" className="text-[10px] font-black uppercase tracking-[0.3em] text-white/40">WhatsApp</Label>
-            <Input 
-              id="WhatsApp" 
-              {...form.register("WhatsApp")} 
+            <Input
+              id="WhatsApp"
+              type="tel"
+              inputMode="tel"
+              autoComplete="tel"
+              {...form.register("WhatsApp")}
               className="bg-white/5 border-white/10 rounded-none h-12 focus:border-white/30 transition-all placeholder:text-white/10"
               placeholder="(00) 00000-0000"
             />

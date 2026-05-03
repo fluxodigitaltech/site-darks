@@ -11,23 +11,23 @@ interface StatItemProps {
 }
 
 const StatItem = ({ icon: Icon, value, label, sublabel }: StatItemProps) => (
-  <div className="relative p-8 border border-white/5 bg-zinc-950/50 group overflow-hidden">
+  <div className="relative p-5 md:p-8 border border-white/5 bg-zinc-950/50 group overflow-hidden">
     <div className="absolute top-0 left-0 w-full h-1 bg-white/5 overflow-hidden">
       <div className="h-full bg-white/40 w-1/3 group-hover:w-full transition-all duration-1000" />
     </div>
-    
-    <div className="flex items-start justify-between mb-8">
-      <div className="p-2 bg-white/5 text-white/20 group-hover:text-white transition-colors">
+
+    <div className="flex items-start justify-between mb-5 md:mb-8 gap-2">
+      <div className="p-2 bg-white/5 text-white/20 group-hover:text-white transition-colors flex-shrink-0">
         <Icon size={20} />
       </div>
-      <span className="text-[10px] font-mono text-white/20 uppercase tracking-[0.2em]">{sublabel}</span>
+      <span className="text-[9px] md:text-[10px] font-mono text-white/20 uppercase tracking-[0.15em] md:tracking-[0.2em] text-right">{sublabel}</span>
     </div>
 
     <div className="space-y-1">
-      <h3 className="text-5xl font-black italic text-white tracking-tighter leading-none">
+      <h3 className="text-4xl md:text-5xl font-black italic text-white tracking-tighter leading-none">
         {value}
       </h3>
-      <p className="text-xs font-black text-white/40 uppercase tracking-[0.3em] italic">
+      <p className="text-[10px] md:text-xs font-black text-white/40 uppercase tracking-[0.25em] md:tracking-[0.3em] italic">
         {label}
       </p>
     </div>
@@ -36,8 +36,8 @@ const StatItem = ({ icon: Icon, value, label, sublabel }: StatItemProps) => (
 
 const StatsSection = () => {
   return (
-    <section className="container mx-auto px-6">
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+    <section className="container mx-auto px-4 md:px-6">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4">
         <StatItem 
           icon={Clock} 
           value="24H" 

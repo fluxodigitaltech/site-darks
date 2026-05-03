@@ -29,22 +29,22 @@ const FAQSection = () => {
   ];
 
   return (
-    <section className="py-24 bg-zinc-950/50 border-y border-white/5">
-      <div className="container mx-auto px-6 max-w-3xl">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-6xl font-black italic uppercase tracking-tighter text-white mb-4">
+    <section className="py-16 md:py-24 bg-zinc-950/50 border-y border-white/5">
+      <div className="container mx-auto px-4 md:px-6 max-w-3xl">
+        <div className="text-center mb-10 md:mb-16">
+          <h2 className="text-3xl sm:text-4xl md:text-6xl font-black italic uppercase tracking-tighter text-white mb-4">
             DÚVIDAS <span className="text-white/20">FREQUENTES</span>
           </h2>
           <div className="h-1 w-20 bg-white/10 mx-auto" />
         </div>
 
-        <Accordion type="single" collapsible className="w-full space-y-4">
+        <Accordion type="single" collapsible className="w-full space-y-3 md:space-y-4">
           {faqs.map((faq, i) => (
-            <AccordionItem key={i} value={`item-${i}`} className="border-white/10 bg-black/40 px-6 rounded-xl">
-              <AccordionTrigger className="text-white font-bold uppercase tracking-tighter hover:no-underline py-6 text-left">
+            <AccordionItem key={i} value={`item-${i}`} className="border-white/10 bg-black/40 px-4 md:px-6 rounded-xl">
+              <AccordionTrigger className="text-white text-sm md:text-base font-bold uppercase tracking-tighter hover:no-underline py-5 md:py-6 text-left">
                 {faq.question}
               </AccordionTrigger>
-              <AccordionContent className="text-white/50 font-medium leading-relaxed pb-6">
+              <AccordionContent className="text-white/50 text-sm md:text-base font-medium leading-relaxed pb-5 md:pb-6">
                 {faq.answer}
               </AccordionContent>
             </AccordionItem>
