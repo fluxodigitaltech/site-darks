@@ -210,8 +210,27 @@ const UnitCard: React.FC<UnitCardProps> = ({ unit, allMemberships }) => {
         {/* Gradiente para garantir legibilidade do nome sobre a foto */}
         <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-black via-black/60 to-transparent pointer-events-none z-0" />
 
-        <div className="absolute bottom-4 left-4 right-4 z-10">
-          <h3 className="font-black italic uppercase tracking-tighter leading-none text-3xl text-white drop-shadow-lg">{unit.name}</h3>
+        <div className="absolute bottom-3 left-4 right-4 z-10">
+          {(() => {
+            // Split "DARK'S GYM - <localização>" em marca + local. Funciona pra
+            // "Darks Gym - Mauá" e "Dark's Gym - Vila Alto..." independentes do
+            // tipo de hífen (- ou —).
+            const parts = unit.name.split(/\s+[-–—]\s+/);
+            const brand = parts.length > 1 ? parts[0] : null;
+            const location = parts.length > 1 ? parts.slice(1).join(" - ") : unit.name;
+            return (
+              <>
+                {brand && (
+                  <span className="block text-[10px] font-bold uppercase tracking-[0.3em] text-white/60 mb-1 drop-shadow">
+                    {brand}
+                  </span>
+                )}
+                <h3 className="font-black italic uppercase tracking-tighter leading-[0.95] text-2xl sm:text-3xl text-white drop-shadow-lg break-words">
+                  {location}
+                </h3>
+              </>
+            );
+          })()}
         </div>
       </div>
 
