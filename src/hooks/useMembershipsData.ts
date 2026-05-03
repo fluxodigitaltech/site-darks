@@ -19,16 +19,16 @@ export interface Membership {
   urlSale: string;
   onlineSalesObservations: string | null;
   differentials: MembershipDifferential[];
-  accessBranches: any | null;
-  additionalService: any | null;
-  serviceYearly: any | null;
+  accessBranches: unknown | null;
+  additionalService: unknown | null;
+  serviceYearly: unknown | null;
   typePromotionalPeriod: number;
   valuePromotionalPeriod: number;
   monthsPromotionalPeriod: number;
   daysPromotionalPeriod: number;
-  minPeriodStayMembership: any | null;
-  installmentsPromotionalPeriod: any | null;
-  activitiesGroups: any | null;
+  minPeriodStayMembership: unknown | null;
+  installmentsPromotionalPeriod: unknown | null;
+  activitiesGroups: unknown | null;
   inactive: boolean;
   displayName: string;
   entries: {
@@ -40,7 +40,7 @@ export interface Membership {
 
 interface EvoApiResponse {
   qtde: number;
-  lista: any | null;
+  lista: unknown | null;
   list: Membership[];
 }
 

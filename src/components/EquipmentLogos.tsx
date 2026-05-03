@@ -12,12 +12,13 @@ interface EquipmentLogosProps {
 }
 
 const EquipmentLogos: React.FC<EquipmentLogosProps> = ({ logoUrls }) => {
-  if (logoUrls.length === 0) return null;
-
   // Configuração do plugin Autoplay - Removido 'loop' que não existe no plugin
+  // (useRef precisa vir antes de qualquer early return para respeitar as Rules of Hooks)
   const plugin = React.useRef(
     Autoplay({ delay: 3000, stopOnInteraction: false })
   );
+
+  if (logoUrls.length === 0) return null;
 
   return (
     <div className="mt-20 py-8 border border-border rounded-xl bg-secondary/50 overflow-hidden">

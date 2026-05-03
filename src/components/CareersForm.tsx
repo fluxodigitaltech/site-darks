@@ -95,9 +95,10 @@ const CareersForm: React.FC = () => {
       showSuccess("Candidatura enviada com sucesso!");
       form.reset();
       removeFile();
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error(error);
-      showError(`Erro ao enviar candidatura: ${error.message}`);
+      const message = error instanceof Error ? error.message : "Erro desconhecido.";
+      showError(`Erro ao enviar candidatura: ${message}`);
     } finally {
       setIsSubmitting(false);
     }

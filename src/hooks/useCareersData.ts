@@ -10,7 +10,7 @@ export interface NocoDBCareer {
   Nome: string;
   "E-mail": string;
   Telefone: string;
-  "Currículo": any;
+  "Currículo": unknown;
   Motivo: string;
   "Vaga de interesse": string; // Novo campo
 }

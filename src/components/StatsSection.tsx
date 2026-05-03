@@ -1,9 +1,16 @@
 "use client";
 
 import React from "react";
-import { Activity, Users, Clock, Flame } from "lucide-react";
+import { Activity, Users, Clock, Flame, type LucideIcon } from "lucide-react";
 
-const StatItem = ({ icon: Icon, value, label, sublabel }: any) => (
+interface StatItemProps {
+  icon: LucideIcon;
+  value: string;
+  label: string;
+  sublabel: string;
+}
+
+const StatItem = ({ icon: Icon, value, label, sublabel }: StatItemProps) => (
   <div className="relative p-8 border border-white/5 bg-zinc-950/50 group overflow-hidden">
     <div className="absolute top-0 left-0 w-full h-1 bg-white/5 overflow-hidden">
       <div className="h-full bg-white/40 w-1/3 group-hover:w-full transition-all duration-1000" />

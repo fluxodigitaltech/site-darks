@@ -119,7 +119,7 @@ const AdminUnits: React.FC = () => {
     },
   });
 
-  const addUnitMutation = useMutation<any, Error, UnitFormData>({
+  const addUnitMutation = useMutation<unknown, Error, UnitFormData>({
     mutationFn: async (newUnit) => {
       const url = `${NOCODB_API_BASE_URL}/${NOCODB_TABLE_ID}/records`;
       const response = await fetch(url, {
@@ -145,7 +145,7 @@ const AdminUnits: React.FC = () => {
     },
   });
 
-  const updateUnitMutation = useMutation<any, Error, UnitFormData>({
+  const updateUnitMutation = useMutation<unknown, Error, UnitFormData>({
     mutationFn: async (updatedUnit) => {
       const url = `${NOCODB_API_BASE_URL}/${NOCODB_TABLE_ID}/records`;
       const payload = [{ Id: updatedUnit.Id, ...updatedUnit }];
@@ -172,7 +172,7 @@ const AdminUnits: React.FC = () => {
     },
   });
 
-  const deleteUnitMutation = useMutation<any, Error, number>({
+  const deleteUnitMutation = useMutation<unknown, Error, number>({
     mutationFn: async (unitId) => {
       const url = `${NOCODB_API_BASE_URL}/${NOCODB_TABLE_ID}/records`;
       const payload = [{ Id: unitId }];

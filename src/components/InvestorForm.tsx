@@ -64,8 +64,9 @@ const InvestorForm: React.FC = () => {
       await submitInvestorForm(payload);
       showSuccess("Interesse registrado com sucesso! Nossa equipe entrará em contato.");
       form.reset();
-    } catch (error: any) {
-      showError(`Erro ao enviar dados: ${error.message}`);
+    } catch (error: unknown) {
+      const message = error instanceof Error ? error.message : "Erro desconhecido.";
+      showError(`Erro ao enviar dados: ${message}`);
     } finally {
       setIsSubmitting(false);
     }
