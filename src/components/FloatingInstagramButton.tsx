@@ -5,7 +5,7 @@ import { cn } from '@/lib/utils';
 const FloatingInstagramButton = () => {
   return (
     <a
-      href="https://www.instagram.com/darks.gym/"
+      href="https://www.instagram.com/darksgymoficial/"
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Siga-nos no Instagram"

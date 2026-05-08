@@ -64,7 +64,7 @@ const Footer = () => {
           <div className="text-center md:text-left">
             <h3 className="font-semibold mb-4 font-display text-foreground">Siga-nos</h3>
             <div className="flex justify-center md:justify-start space-x-4">
-              <a href="https://www.instagram.com/darks.gym/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="text-muted-foreground hover:text-primary transition-colors">
+              <a href="https://www.instagram.com/darksgymoficial/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="text-muted-foreground hover:text-primary transition-colors">
                 <Instagram className="w-6 h-6" />
               </a>
               <a href={whatsappLink} target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" className="text-muted-foreground hover:text-primary transition-colors">
