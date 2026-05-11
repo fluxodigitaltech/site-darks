@@ -8,7 +8,8 @@ import UnitCard from "@/components/UnitCard";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
-const getTier = (name: string): 'PRO' | 'PRIME' | 'DIAMOND' | undefined => {
+const getTier = (name: string | null | undefined): 'PRO' | 'PRIME' | 'DIAMOND' | undefined => {
+  if (!name) return undefined;
   const n = name.toUpperCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
   if (n.includes('MAUA') || n.includes('BERETTA') || n.includes('QUEIROS')) return 'PRO';
   if (n.includes('MARTIM') || n.includes('RIBEIRAO') || n.includes('SANTO ANDRE')) return 'PRIME';
@@ -27,7 +28,8 @@ const extractFotoUrl = (foto: unknown): string | undefined => {
 };
 
 // Mapeamento fixo de nome da unidade → idBranch do EVO (fallback quando NocoDB não tiver o campo)
-const getIdBranchFallback = (name: string): number | undefined => {
+const getIdBranchFallback = (name: string | null | undefined): number | undefined => {
+  if (!name) return undefined;
   const n = name.toUpperCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
   if (n.includes('SANTO ANDRE')) return 1;
   if (n.includes('MAUA')) return 2;
@@ -125,26 +127,26 @@ return units.some(unit => {
     });
   }, [uniqueModalities, units, allMemberships, unitsLoading, membershipsLoading]);
 
-  const filteredUnits = useMemo(() => {
-    if (selectedModality === "all") {
-      return units;
+const filteredUnits = useMemo(() => {
+  if (selectedModality === "all") {
+    return units;
+  }
+  return units.filter(unit => {
+    // Verifica no NocoDB (campo Modalidade)
+    const nocoModalities = unit.Modalidade ? unit.Modalidade.split(',').map(m => m.trim().toUpperCase()) : [];
+    if (nocoModalities.includes(selectedModality)) {
+      return true;
     }
-    return units.filter(unit => {
-      // Verifica no NocoDB (campo Modalidade)
-      const nocoModalities = unit.modalidade ? unit.modalidade.split(',').map(m => m.trim().toUpperCase()) : [];
-      if (nocoModalities.includes(selectedModality)) {
-        return true;
-      }
-
-      // Verifica no EVO
-      const unitMemberships = allMemberships?.filter(m => m.idBranch === unit.idBranch);
-      return unitMemberships?.some(membership =>
-        membership.differentials?.some(differential =>
-          differential.title.trim().toUpperCase() === selectedModality
-        )
-      );
-    });
-  }, [units, selectedModality, allMemberships]);
+  
+    // Verifica no EVO
+    const unitMemberships = allMemberships?.filter(m => m.idBranch === unit.idBranch);
+    return unitMemberships?.some(membership =>
+      membership.differentials?.some(differential =>
+        differential.title.trim().toUpperCase() === selectedModality
+      )
+    );
+  });
+}, [units, selectedModality, allMemberships]);
 
   return (
     <section className="py-16 md:py-24 bg-black relative overflow-hidden" id="unidades">
