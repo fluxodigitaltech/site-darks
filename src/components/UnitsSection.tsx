@@ -140,11 +140,11 @@ const filteredUnits = useMemo(() => {
   
     // Verifica no EVO
     const unitMemberships = allMemberships?.filter(m => m.idBranch === unit.idBranch);
-    return unitMemberships?.some(membership =>
-      membership.differentials?.some(differential =>
-        differential.title.trim().toUpperCase() === selectedModality
-      )
-    );
+return unitMemberships?.some(membership =>
+  membership.differentials?.some(differential =>
+    differential.title && differential.title.trim().toUpperCase() === selectedModality
+  )
+);
   });
 }, [units, selectedModality, allMemberships]);
 

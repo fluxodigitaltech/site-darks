@@ -65,12 +65,21 @@ const fetchMemberships = async (): Promise<Membership[]> => {
         "accept": "text/plain",
         "Authorization": `Basic ${apiKey}`,
       },
-    }).then(response => {
+    }).then(async response => {
       if (!response.ok) {
         console.error(`Falha ao buscar planos para uma das chaves: ${response.statusText}`);
         return { list: [] }; // Retorna uma lista vazia em caso de erro para não quebrar a aplicação
       }
-      return response.json();
+      
+      try {
+        return await response.json();
+      } catch (jsonError) {
+        console.error(`Erro ao fazer parse do JSON da resposta da EVO API:`, jsonError);
+        return { list: [] }; // Retorna lista vazia se o JSON for inválido
+      }
+    }).catch(fetchError => {
+      console.error(`Erro de rede ao chamar a EVO API:`, fetchError);
+      return { list: [] }; // Retorna lista vazia em caso de erro de rede
     })
   );
 
