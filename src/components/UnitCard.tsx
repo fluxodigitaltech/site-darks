@@ -32,13 +32,15 @@ const UnitCard: React.FC<UnitCardProps> = ({ unit, allMemberships }) => {
   const [isHovered, setIsHovered] = useState(false);
 
   const availableMemberships = useMemo(() => {
-    // Normaliza texto removendo acentos para comparação segura
-    const normalize = (s: string) =>
-      s.trim().toUpperCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+    // Normaliza texto removendo acentos para comparação segura.
+    // Tolera null/undefined retornando string vazia — evita crash de render
+    // quando o EVO/NocoDB devolve nome de plano ou de unidade ausente
+    // (sem ErrorBoundary, o erro derrubava a árvore e a página ficava preta).
+    const normalize = (s: string | null | undefined) =>
+      (s ?? "").trim().toUpperCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 
     // Ribeirão Preto: idBranch fixo = 3, mostrar apenas o plano PRÉ VENDA
-    const isRibeirao = unit.idBranch === 3 ||
-      unit.name.toUpperCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").includes("RIBEIRAO");
+    const isRibeirao = unit.idBranch === 3 || normalize(unit.name).includes("RIBEIRAO");
 
     if (isRibeirao) {
       return allMemberships
@@ -76,8 +78,8 @@ const UnitCard: React.FC<UnitCardProps> = ({ unit, allMemberships }) => {
         const primaryRecurrent = "PLANO DARKS PROMOCIONAL";
         const secondaryRecurrent = "PLANO RECORRENTE (DARKS)";
         const tertiaryRecurrent = "PLANO RECORRENTE";
-        const aName = a.nameMembership.trim().toUpperCase();
-        const bName = b.nameMembership.trim().toUpperCase();
+        const aName = normalize(a.nameMembership);
+        const bName = normalize(b.nameMembership);
 
         const getScore = (name: string) => {
           const n = name.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
@@ -215,9 +217,10 @@ const UnitCard: React.FC<UnitCardProps> = ({ unit, allMemberships }) => {
             // Split "DARK'S GYM - <localização>" em marca + local. Funciona pra
             // "Darks Gym - Mauá" e "Dark's Gym - Vila Alto..." independentes do
             // tipo de hífen (- ou —).
-            const parts = unit.name.split(/\s+[-–—]\s+/);
+            const safeName = unit.name ?? "";
+            const parts = safeName.split(/\s+[-–—]\s+/);
             const brand = parts.length > 1 ? parts[0] : null;
-            const location = parts.length > 1 ? parts.slice(1).join(" - ") : unit.name;
+            const location = parts.length > 1 ? parts.slice(1).join(" - ") : safeName;
             return (
               <>
                 {brand && (
