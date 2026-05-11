@@ -23,7 +23,7 @@ ENV VITE_NOCODB_API_TOKEN=$VITE_NOCODB_API_TOKEN
 RUN pnpm build
 
 # ── Stage 2: Serve ───────────────────────────────────────────────────────────
-FROM nginx:1.27-alpine AS runner
+FROM nginx:1.29-alpine AS runner
 
 # Remove config padrão do nginx
 RUN rm /etc/nginx/conf.d/default.conf
