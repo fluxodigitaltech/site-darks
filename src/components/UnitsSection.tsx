@@ -52,7 +52,7 @@ const UnitsSection = () => {
           name: unit.Unidade,
           address: unit.Endereco || unit.Descricao || '',
           hours: unit.Horario || '24 HORAS',
-          imageUrl: getTier(unit.Unidade) === 'PRIME' && unit.Unidade.toUpperCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").includes("RIBEIRAO")
+          imageUrl: getTier(unit.Unidade) === 'PRIME' && unit.Unidade && unit.Unidade.toUpperCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").includes("RIBEIRAO")
             ? "/ribeirao-pires.png"
             : extractFotoUrl(unit.Foto),
           whatsappNumber: unit.WhatsApp,
@@ -114,14 +114,14 @@ const UnitsSection = () => {
     const mandatoryModalities = ["JIU JITSU", "PILATES", "MMA", "WORKOUT", "YOGA", "FLASHBACK"];
     return uniqueModalities.filter(modality => {
       if (mandatoryModalities.includes(modality)) return true;
-      return units.some(unit => {
-        const nocoModalities = unit.modalidade ? unit.modalidade.split(',').map(m => m.trim().toUpperCase()) : [];
-        if (nocoModalities.includes(modality)) return true;
-        const unitMemberships = allMemberships?.filter(m => m.idBranch === unit.idBranch);
-        return unitMemberships?.some(membership =>
-          membership.differentials?.some(d => d.title.trim().toUpperCase() === modality)
-        );
-      });
+return units.some(unit => {
+      const nocoModalities = unit.Modalidade ? unit.Modalidade.split(',').map(m => m.trim().toUpperCase()) : [];
+      if (nocoModalities.includes(modality)) return true;
+      const unitMemberships = allMemberships?.filter(m => m.idBranch === unit.idBranch);
+      return unitMemberships?.some(membership =>
+        membership.differentials?.some(d => d.title && d.title.trim().toUpperCase() === modality)
+      );
+    });
     });
   }, [uniqueModalities, units, allMemberships, unitsLoading, membershipsLoading]);
 
