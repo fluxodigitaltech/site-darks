@@ -1,5 +1,5 @@
 # ── Stage 1: Build ──────────────────────────────────────────────────────────
-FROM node:20-alpine AS builder
+FROM node:26-alpine AS builder
 
 # Instala pnpm (pinado: pnpm@11+ exige Node >=22.13, incompatível com node:20-alpine)
 RUN corepack enable && corepack prepare pnpm@9.15.4 --activate
